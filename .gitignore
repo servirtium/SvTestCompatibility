@@ -5,3 +5,4 @@ typescript/mocks/
 java/target/
 dotnet/bin/
 dotnet/obj/
+.idea
