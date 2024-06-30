@@ -20,8 +20,7 @@ servirtium.setRecordResponseHeadersRemoval([
 ]);
 
 // Set the test name for recording
-const testName = "SVNCheckoutTest";
-servirtium.setTestName(testName);
+servirtium.setTestName("ExampleSubversionCheckoutRecording");
 
 servirtium.startRecord(() => {
     console.log('Recording started');
