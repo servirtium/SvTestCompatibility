@@ -19,7 +19,7 @@ public class Recorder {
 
             public Request modify(Request request) {
                 return request
-                        .replaceHeader("Host", "localhost")
+                        .replaceHeader("Host", "svn.apache.org")
                         .replaceHeader("User-agent", "Svn CLI")
                         .replaceHeader("Date", "Tue, 28 Jan 2020 14:15:55 GMT");
             }
@@ -31,12 +31,9 @@ public class Recorder {
                         .replaceHeader("Date", "Tue, 28 Jan 2020 14:15:55 GMT");
             }
 
-            public boolean isBinary(ContentType contentType) {
-                return false;
-            }
 
             public boolean debugTraffic() {
-                return false;
+                return true;
             }
         };
 
