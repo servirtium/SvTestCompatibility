@@ -1,10 +1,14 @@
-import org.http4k.core.HttpHandler;
+package com.example;
+
+import org.http4k.client.ApacheClient;
 import org.http4k.core.Method;
 import org.http4k.core.Request;
 import org.http4k.core.Response;
 import org.http4k.core.Status;
+import org.http4k.core.Uri;
 import org.http4k.server.SunHttp;
 import org.http4k.servirtium.InteractionStorage;
+import org.http4k.servirtium.InteractionOptions;
 import org.http4k.servirtium.ServirtiumServer;
 import java.io.File;
 import java.io.IOException;
@@ -15,23 +19,21 @@ public class Recorder {
         String baseUrl = "https://svn.apache.org";
         String interactionFile = "ExampleSubversionCheckoutRecording.md";
 
-        HttpHandler handler = request -> {
-            System.out.println("Request: " + request);
-            return Response.create().status(Status.OK);
-        };
-
         ServirtiumServer server = ServirtiumServer.Recording(
-            baseUrl,
-            SunHttp(61417),
+            "test",
+            Uri.of(baseUrl),
             InteractionStorage.Disk(new File(interactionFile)),
-            handler
+            InteractionOptions.Defaults,
+            61417,
+            SunHttp::new,
+            ApacheClient.create()
         );
 
         server.start();
         System.out.println("Recording started");
 
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
