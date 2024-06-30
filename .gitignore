@@ -2,3 +2,4 @@ typescript/dist/
 typescript/node_modules/
 typescript/conf/
 typescript/mocks/
+java/target/
