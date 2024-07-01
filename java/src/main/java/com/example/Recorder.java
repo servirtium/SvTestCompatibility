@@ -1,6 +1,6 @@
 package com.example;
 
-import org.http4k.client.ApacheClient;
+import org.http4k.client.JavaHttpClient;
 import org.http4k.core.*;
 import org.http4k.server.SunHttp;
 import org.http4k.servirtium.InteractionStorage;
@@ -42,7 +42,7 @@ public class Recorder {
             InteractionStorage.Disk(new File("..")),
             io, 61417,
             SunHttp::new,
-            ApacheClient.create()
+            JavaHttpClient.create()
         );
 
         server.start();
@@ -53,8 +53,8 @@ public class Recorder {
         ProcessBuilder pb = new ProcessBuilder("svn", "co", "http://localhost:61417/repos/asf/synapse/tags/3.0.0/modules/distribution/src/main/conf");
         pb.inheritIO();
         Process process = pb.start();
-        int exitCode = process.waitFor();
-        if (exitCode != 0) {
+        boolean exitCode = process.waitFor(30L, TimeUnit.SECONDS);
+        if (exitCode) {
             System.err.println("SVN command failed with exit code " + exitCode);
         }
 
