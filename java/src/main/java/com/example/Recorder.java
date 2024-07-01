@@ -1,6 +1,6 @@
 package com.example;
 
-import org.http4k.client.JavaHttpClient;
+import org.http4k.client.Java8HttpClient;
 import org.http4k.core.*;
 import org.http4k.server.SunHttp;
 import org.http4k.servirtium.InteractionStorage;
@@ -42,7 +42,7 @@ public class Recorder {
             InteractionStorage.Disk(new File("..")),
             io, 61417,
             SunHttp::new,
-            JavaHttpClient.create()
+            Java8HttpClient.create()
         );
 
         server.start();
